@@ -16,7 +16,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/board/")
+@RequestMapping("/board/*")
 @AllArgsConstructor
 public class BoardController {
 
@@ -34,6 +34,11 @@ public class BoardController {
 		service.register(board);
 		rttr.addFlashAttribute("result", board.getBno());
 		return "redirect:/board/list";
+	}
+	
+	@GetMapping("/register")
+	public void register() {
+		
 	}
 	@GetMapping("/get")
 	public void get(@RequestParam("bno")Long bno,Model model) {
