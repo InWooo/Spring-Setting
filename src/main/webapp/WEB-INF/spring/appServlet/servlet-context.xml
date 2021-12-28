@@ -31,6 +31,7 @@
 	<beans:property name="uploadTempDir" value="file:/c:/upload"></beans:property>
 	</beans:bean>
 	
-	<context:component-scan base-package="org.conan.*"></context:component-scan>
+	<context:component-scan base-package="org.conan.service"></context:component-scan>
+	
 	
 </beans:beans>
