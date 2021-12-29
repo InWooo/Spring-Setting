@@ -50,4 +50,14 @@ public class BoardMapperTest {
 	   int count = mapper.update(board);
 	   log.info("UPDATE COUNT : "+count);
    }
+   
+   @Test
+   public void testInsertSelectKey() {
+	   BoardVO board = new BoardVO();
+	   board.setTitle("새로 작성 하는 글");
+	   board.setContent("새로작성하는 내용");
+	   board.setWriter("newbie");
+	   mapper.insertSelectKey(board);
+	   log.info(board);
+   }
 }

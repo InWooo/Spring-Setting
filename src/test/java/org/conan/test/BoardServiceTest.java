@@ -32,7 +32,7 @@ public void testRegister() {
 	board.setContent("새 내용이 솔솔 Service");
 	board.setWriter("newbie");
 	service.register(board);
-	log.info("생성된 게시물의 번호 : ");
+	log.info("생성된 게시물의 번호 : "+board.getBno());
 }
 
 @Test

@@ -26,4 +26,12 @@ content=#{content},
 updateDate=now()
 where bno=#{bno}
 </update>
+
+<insert id="insertSelectKey">
+insert into tbl_board(title,content,writer)
+values(#{title},#{content},#{writer})
+<selectKey resultType="long" keyProperty="bno" order="AFTER">
+SELECT LAST_INSERT_ID()
+</selectKey>
+</insert>
 </mapper>
