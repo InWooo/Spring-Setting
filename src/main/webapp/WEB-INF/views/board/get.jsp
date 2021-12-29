@@ -20,8 +20,11 @@
                 <div class="form-group">
                	<label>Writer</label><input class="form-control" name='writer' value='<c:out value="${board.writer }"/>' readonly="readonly">
                </div>
-               <button data-oper='modify' onclick="location.href='/board/modify?bno=<c:out value="${board.bno }"/>'" type="submit" class="btn btn-default">Modify</button>
-               <a href="list"><button type="reset" class="btn btn-default" >List</button></a>              
+               <button data-oper='modify' class="btn btn-info">Modify</button>
+               <button data-oper='list' class="btn btn-danger" >List</button>
+               <form id="operForm" action="/board/modify" method="get">
+               <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno }"/>'>
+               </form>
                            
                         </div>
                         <!-- /.panel-body -->
@@ -29,6 +32,19 @@
                     <!-- /.panel -->       
        <jsp:include page="../include/footer.jsp"></jsp:include>
       
+      <script>
+      $(document).ready(function(){
+    	  var operForm = $("#operForm");
+     $('button[data-oper="modify"]').on("click",function(e){
+    	  operForm.attr("action","/board/modify").submit();
+      });
+      $('button[data-oper="list"]').on("click",function(e){
+    	  operForm.fine("#bno").remove();
+    	  operForm.attr("action","/board/list");
+    	  operForm.submit();
+      });
+      });
+      </script>
 
 </body>
 </html>
