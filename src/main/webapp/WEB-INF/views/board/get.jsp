@@ -39,7 +39,7 @@
     	  operForm.attr("action","/board/modify").submit();
       });
       $('button[data-oper="list"]').on("click",function(e){
-    	  operForm.fine("#bno").remove();
+    	  operForm.find("#bno").remove();
     	  operForm.attr("action","/board/list");
     	  operForm.submit();
       });

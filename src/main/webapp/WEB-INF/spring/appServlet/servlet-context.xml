@@ -20,7 +20,6 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>	
-	<context:component-scan base-package="org.conan.controller" />
 	
 	<beans:bean id="multipartResolver"
 	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -31,8 +30,8 @@
 	<beans:property name="uploadTempDir" value="file:/c:/upload"></beans:property>
 	</beans:bean>
 	
+	<context:component-scan base-package="org.conan.controller" />
 	<context:component-scan base-package="org.conan.service"></context:component-scan>
-	<context:component-scan base-package="org.conan.sample"></context:component-scan>
 	
 	
 </beans:beans>
