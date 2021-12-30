@@ -14,16 +14,16 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-			  <div class="panel-heading">
-                            게시글 목록
-                            <button id='regBtn' type="button" class="btn btn-outline btn-success btn-xs pull-right" >글쓰기</button>
-                        </div>
-			
+				<div class="panel-heading">
+					게시글 목록
+					<button id='regBtn' type="button"
+						class="btn btn-outline btn-success btn-xs pull-right">글쓰기</button>
+				</div>
+
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 					<table width="100%"
-						class="table table-striped table-bordered table-hover"
-						id="dataTables-example">
+						class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
 								<th>#번호</th>
@@ -37,7 +37,7 @@
 						<c:forEach var="tb" items="${list}">
 							<tr>
 								<td>${tb.bno }</td>
-								<td> <a href="get?bno=${tb.bno}">${tb.title }</a></td>
+								<td><a class='move' href='<c:out value="${tb.bno }"/>'><c:out value="${tb.title }"/></a></td>
 								<td>${tb.writer }</td>
 								<td>${tb.regDate }</td>
 								<td>${tb.updateDate }</td>
@@ -45,19 +45,49 @@
 						</c:forEach>
 						<tbody>
 					</table>
-					<div class='pull-right'>
-					<ul class="pagination">
-						<c:if test="${pageMaker.prev }">
-						<li class="paginate_button previous"><a href="#">Previous</a></li>
-						</c:if>
-						<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-							<li class="page-item"><a href="#">${num }</a></li>
-						</c:forEach>
-						<c:if test="${pageMaker.next }">
-						<li class="paginate_button next"><a href="#">Next</a></li>
-						</c:if>
-					</ul>
+					<div class='row'>
+						<div class="col-lg-12">
+							<form id='searchForm' action='/board/list' method='get'>
+							<select name='type'>
+							<option value="" <c:out value="${pageMaker.cri.type == null?'selected':''}"/>>----</option>
+							<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
+							<option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
+							<option value="W" <c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자</option>
+							<option value="TW" <c:out value="${pageMaker.cri.type eq 'TW'?'selected':''}"/>>제목,작성자</option>
+							<option value="TCW" <c:out value="${pageMaker.cri.type eq 'TCW'?'selected':''}"/>>제목,내용,작성자</option>
+							</select>
+							<input type='text' name='keyword' value='<c:out value="${pageMaker.cri.keyword }"/>'/>
+							<input type='hidden' name='pageNum' value="${pageMaker.cri.pageNum }"/>
+							<input type='hidden' name='amount' value="${pageMaker.cri.amount }"/>
+							
+							<button class='btn btn-info'>Search</button>
+							</form>
+						</div>
 					</div>
+					<div class='pull-right'>
+						<ul class="pagination">
+							<c:if test="${pageMaker.prev }">
+								<li class="paginate_button previous"><a
+									href="${pageMaker.startPage-1 }">Previous</a></li>
+							</c:if>
+							<c:forEach var="num" begin="${pageMaker.startPage }"
+								end="${pageMaker.endPage }">
+								<li class="paginate_button ${pageMaker.cri.pageNum==num?"active":"" }"><a
+									href="${num }">${num }</a></li>
+							</c:forEach>
+							<c:if test="${pageMaker.next }">
+								<li class="paginate_button next"><a
+									href="${pageMaker.endPage+1 }">Next</a></li>
+							</c:if>
+						</ul>
+					</div>
+					<form id='actionForm' action="/board/list" method='get'>
+						<input type='hidden' name='pageNum'
+							value="${pageMaker.cri.pageNum }"> <input type='hidden'
+							name='amount' value="${pageMaker.cri.amount }">
+							<input type='hidden' name='keyword' value="${pageMaker.cri.keyword }"/>
+							<input type='hidden' name='type' value="${pageMaker.cri.type }"/>
+					</form>
 					<!-- /.table-responsive -->
 					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
@@ -95,28 +125,57 @@
 
 <jsp:include page="../include/footer.jsp"></jsp:include>
 
- <script type="text/javascript">
-		$(document).ready(function(){
-			var result = '<c:out value="${result}"/>';
-			checkModal(result);
-			history.replaceState({},null,null);
-			function checkModal(result){
-				if(result===""||history.state){
-					return;
-				}
-				if(parseInt(result)>0){
-					$(".modal-body").html(
-					"게시글"+parseInt(result)+"번이 등록되었습니다."		
-					)
-				}
-				$("#myModal").modal("show");
+<script type="text/javascript">
+	$(document).ready(function() {
+		var result = '<c:out value="${result}"/>';
+		checkModal(result);
+		history.replaceState({}, null, null);
+		function checkModal(result) {
+			if (result === "" || history.state) {
+				return;
 			}
-		});
-		
-		$("#regBtn").on("click",function(){
-			self.location = "/board/register";
-		});//버튼 클릭시 등록창으로 이동
-		</script>
+			if (parseInt(result) > 0) {
+				$(".modal-body").html("게시글" + parseInt(result) + "번이 등록되었습니다.")
+			}
+			$("#myModal").modal("show");
+		}
+	});
+
+	$("#regBtn").on("click", function() {
+		self.location = "/board/register";
+	});//버튼 클릭시 등록창으로 이동
+
+	var actionForm = $("#actionForm");
+	$(".paginate_button a").on("click", function(e) {
+		e.preventDefault();
+		console.log('click');
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		actionForm.submit();
+	})
+	$(".move").on("click",function(e){
+		e.preventDefault();
+		//console.lig('click');
+		actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"'>");
+		actionForm.attr("action","/board/get");
+		actionForm.submit();
+	})
+	
+	var searchForm=$("#searchForm");
+	$("#searchForm button").on("click",function(e){
+		if(!searchForm.find("option:selected").val()){
+			alert("검색 종류를 선택하시오");
+			return false;
+		}
+		if(!searchForm.find("input[name='keyword']").val()){
+			alert("키워드를 입력하시오");
+			return false;
+		}
+		searchForm.find("input[name='pageNum']").val()("1");
+		e.preventDefault();
+		searchForm.submit();
+	})
+	
+</script>
 
 </body>
 </html>

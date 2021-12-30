@@ -8,6 +8,7 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">Modify</h1>
                 </div>
+                
                <div class="form-group">
                	<label>Bno</label><input class="form-control" name='bno' value='<c:out value="${board.bno }"/>'readonly="readonly">
                </div>
@@ -24,6 +25,10 @@
                <button data-oper='list' class="btn btn-danger" >List</button>
                <form id="operForm" action="/board/modify" method="get">
                <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno }"/>'>
+               <input type='hidden' id='pageNum' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
+               <input type='hidden' id='amount' name='amount' value='<c:out value="${cri.amount }"/>'>
+               <input type='hidden' name='keyword' value="${cri.keyword }"/>
+			   <input type='hidden' name='type' value="${cri.type }"/>
                </form>
                            
                         </div>

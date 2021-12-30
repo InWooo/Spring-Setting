@@ -61,5 +61,9 @@ public class BoardServiceTest {
 	public void testGetList() {
 		service.getList(new Criteria(2,5)).forEach(board->log.info(board));
 	}
-
+	
+	@Test
+	public void testGetTotal() {
+		service.getTotal(new Criteria(2,5));
+	}
 }

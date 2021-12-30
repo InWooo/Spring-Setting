@@ -30,7 +30,11 @@
                </div>
                <button type="submit" data-oper='modify' class="btn btn-info">Modify</button>
                <button type="submit" data-oper='remove' class="btn btn-danger">Remove</button>
-               <a href="list"><button type="submit" data-oper='list' class="btn btn-success" >List</button></a>              
+               <a href="list"><button type="submit" data-oper='list' class="btn btn-success" >List</button></a>
+               <input type='hidden' id='pageNum' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
+               <input type='hidden' id='amount' name='amount' value='<c:out value="${cri.amount }"/>'>
+               <input type='hidden' name='keyword' value="${cri.keyword }"/>
+			   <input type='hidden' name='type' value="${cri.type }"/>
                            </form>
                         </div>
                         <!-- /.panel-body -->
@@ -49,8 +53,16 @@ $('button').on("click",function(e){
 		formObj.attr("action","/board/remove");
 	}else if(operation ==='list'){
 		//move to list
-		formObj.attr("action","board/list").attr("method","get");
+		formObj.attr("action","/board/list").attr("method","get");
+		var pageNumTag=$("input[name='pageNum']").clone();
+		var amountTag=$("input[name='amount']").clone();
+		var keywordTag=$("input[name='keyword']").clone();
+		var typeTag=$("input[name='type']").clone();
 		formObj.empty();
+		formObj.append(pageNumTag);
+		formObj.append(amountTag);
+		formObj.append(keywordTag);
+		formObj.append(typeTag);
 	}
 	formObj.submit();	
 });

@@ -64,10 +64,13 @@ public class BoardMapperTest {
 	   log.info(board);
    }
    
+   
    @Test
-   public void testPaging() {
-	   Criteria cri = new Criteria(4,3);
-	   List<BoardVO> list=mapper.getListWithPaging(cri);
+   public void testSearch() {
+	   Criteria cri = new Criteria();
+	   cri.setKeyword("newbie");
+	   cri.setType("TCW");
+	   List<BoardVO>list = mapper.getListWithPaging(cri);
 	   list.forEach(board->log.info(board));
    }
 }
