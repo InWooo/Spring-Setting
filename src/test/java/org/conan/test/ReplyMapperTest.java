@@ -1,7 +1,9 @@
 package org.conan.test;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
+import org.conan.domain.Criteria;
 import org.conan.domain.ReplyVO;
 import org.conan.persistence.ReplyMapper;
 import org.junit.Test;
@@ -56,5 +58,11 @@ public class ReplyMapperTest {
 	   vo.setReply("Update Reply");
 	   int count = remapper.update(vo);
 	   log.info("Update Count : " + count);
+   }
+   @Test
+   public void testList() {
+	   Criteria cri = new Criteria();
+	   List<ReplyVO> replies = remapper.getListWithPaging(cri,bnoArr[0]);
+	   replies.forEach(reply->log.info(reply));
    }
 }

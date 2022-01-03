@@ -18,5 +18,9 @@ delete from tbl_reply where rno=#{rno}
 update tbl_reply set reply=#{reply},updateDate=now() where rno=#{rno}
 </update>
 
+<select id="getListWithPaging" resultType="org.conan.domain.ReplyVO">
+select * from tbl_reply where bno=#{bno} limit #{cri.pageStart},#{cri.amount}
+</select>
+
 
 </mapper>
