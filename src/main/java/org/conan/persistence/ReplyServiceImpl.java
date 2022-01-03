@@ -6,6 +6,7 @@ import org.conan.domain.Criteria;
 import org.conan.domain.ReplyVO;
 import org.conan.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import lombok.Data;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import lombok.extern.log4j.Log4j;
 
 @Data
 @Log4j
+@Service
 public class ReplyServiceImpl implements ReplyService {
 	@Setter(onMethod_= @Autowired)
 	private ReplyMapper remapper;

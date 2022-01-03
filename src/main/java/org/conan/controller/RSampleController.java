@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.conan.domain.ReplyVO;
 import org.conan.domain.SampleVO;
 import org.conan.domain.Ticket;
 import org.springframework.http.HttpStatus;
@@ -74,6 +75,7 @@ public class RSampleController {
 		log.info("convert....ticket"+ticket);
 		return ticket;
 	}
+	
 	
 	
 	

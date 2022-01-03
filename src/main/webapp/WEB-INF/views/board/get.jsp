@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <script type="text/javascript" src="../resources/js/reply.js" ></script> 
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
      <jsp:include page="../include/header.jsp"></jsp:include>
 
@@ -8,7 +9,6 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">Modify</h1>
                 </div>
-                
                <div class="form-group">
                	<label>Bno</label><input class="form-control" name='bno' value='<c:out value="${board.bno }"/>'readonly="readonly">
                </div>
@@ -37,8 +37,9 @@
                     <!-- /.panel -->       
        <jsp:include page="../include/footer.jsp"></jsp:include>
       
-      <script>
+      <script >
       $(document).ready(function(){
+    	  console.log(replyService);
     	  var operForm = $("#operForm");
      $('button[data-oper="modify"]').on("click",function(e){
     	  operForm.attr("action","/board/modify").submit();

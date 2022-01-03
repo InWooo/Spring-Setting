@@ -17,6 +17,8 @@
 
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
+
+<script src="/resources/vendor/jquery/jquery.min.js"></script>
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
