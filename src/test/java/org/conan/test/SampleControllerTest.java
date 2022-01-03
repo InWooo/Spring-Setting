@@ -1,5 +1,8 @@
 package org.conan.test;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.conan.domain.Ticket;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +26,7 @@ import lombok.extern.log4j.Log4j;
 @WebAppConfiguration
 @ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml","file:src/main/webapp/WEB-INF/spring/root-context.xml"})
 @Log4j
-public class BoardControllerTest {
+public class SampleControllerTest {
 	@Setter(onMethod_= {@Autowired})
 	private WebApplicationContext ctx;
 	private MockMvc mMvc;
@@ -62,6 +65,16 @@ public class BoardControllerTest {
 		log.info(mMvc.perform(MockMvcRequestBuilders.get("/board/list").param("pageNum","2").param("amount","3")).andReturn().getModelAndView().getModelMap());
 	}
 	
+	@Test
+	public void testConvert()throws Exception{
+		Ticket ticket = new Ticket();
+		ticket.setTno(123);
+		ticket.setOwner("admin");
+		ticket.setGrade("SSS");
+		String jsonStr=new Gson().toJson(ticket);
+		log.info(jsonStr);
+		mMvc.perform(post("/rsample/ticket").contentType(MediaType.APPLICATION_JSON).content(jsonStr)).andExpect(status().is(200));
+	}
 	
 	
 }
