@@ -41,6 +41,44 @@
       $(document).ready(function(){
     	  console.log(replyService);
     	  var operForm = $("#operForm");
+    	  var bnoValue='<c:out value="${board.bno}"/>';
+    	  
+    	  replyService.add(
+    		{
+    			reply:"JS TEST",replyer:"js tester",bno:bnoValue
+    		},function(result){
+    			alert("RESULT : "+result);
+    		});
+    	  
+    	  replyService.getList(
+    		{bno:bnoValue,page:1},
+    		function(list){
+    			for(var i=0,len=list.length||0;i<len;i++){
+    				console.log(list[i]);
+    			}
+    		});
+    	  
+    	 /*  replyService.remove(
+    			23,function(count){
+    				console.log(count);
+    				if(count==="success"){alert("REMOVED");}
+    			},function(err){
+    				alert('error occurred....');
+    			}); */
+    			
+    			replyService.update({
+    				rno:4,
+    				bno:bnoValue,
+    				reply:"modified reply"
+    			}, function(result){
+    				alert("수정 완료");
+    			});
+    			
+    			replyService.get(4,function(data){
+    				console.log(data);
+    			})
+    		
+    	  
      $('button[data-oper="modify"]').on("click",function(e){
     	  operForm.attr("action","/board/modify").submit();
       });
