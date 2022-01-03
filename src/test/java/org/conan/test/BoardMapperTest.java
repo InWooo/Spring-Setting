@@ -73,4 +73,9 @@ public class BoardMapperTest {
 	   List<BoardVO>list = mapper.getListWithPaging(cri);
 	   list.forEach(board->log.info(board));
    }
+   
+   @Test
+   public void testMapper() {
+	   log.info(mapper);
+   }
 }
