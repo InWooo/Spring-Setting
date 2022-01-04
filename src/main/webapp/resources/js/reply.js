@@ -18,7 +18,7 @@ var replyService=(function(){
 		var page = param.page||1;
 		$.getJSON("/replies/pages/"+bno+"/"+page+".json",
 		function(data){
-			if(callback){callback(data);}}).fail(function(xhr,status,err){
+			if(callback){callback(data.replyCnt,data.list);}}).fail(function(xhr,status,err){
 				if(error){error();}
 			});
 		}function remove(rno,callback,error){

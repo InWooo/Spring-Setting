@@ -1,8 +1,8 @@
 package org.conan.persistence;
 
-import java.util.List;
-
+import org.apache.catalina.mapper.Mapper;
 import org.conan.domain.Criteria;
+import org.conan.domain.ReplyPageDTO;
 import org.conan.domain.ReplyVO;
 import org.conan.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +48,10 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public List<ReplyVO> getList(Criteria cri, Long bno) {
+	public ReplyPageDTO getListPage(Criteria cri, Long bno) {
 		// TODO Auto-generated method stub
-		log.info("getList : "+bno);
-		return remapper.getListWithPaging(cri,bno);
+		log.info(bno+"의 댓글 갯수 : "+remapper.getCountByBno(bno));
+		return new ReplyPageDTO( remapper.getCountByBno(bno),remapper.getListWithPaging(cri,bno));
 	}
 
 }

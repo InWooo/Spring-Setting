@@ -79,5 +79,7 @@ public class BoardMapperTest {
 	   list.forEach(board->log.info(board));
    }
    
+  
+   
 
 }

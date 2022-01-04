@@ -22,5 +22,9 @@ update tbl_reply set reply=#{reply},updateDate=now() where rno=#{rno}
 select * from tbl_reply where bno=#{bno} limit #{cri.pageStart},#{cri.amount}
 </select>
 
+<select id="getCountByBno" resultType="int">
+select count(*) from tbl_reply where bno=${bno}
+</select>
+
 
 </mapper>
