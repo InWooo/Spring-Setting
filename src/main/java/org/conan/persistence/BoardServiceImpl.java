@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.conan.domain.BoardVO;
 import org.conan.domain.Criteria;
+import org.conan.domain.ReplyVO;
 import org.conan.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
