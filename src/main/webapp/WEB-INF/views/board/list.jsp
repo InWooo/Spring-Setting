@@ -14,10 +14,10 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">
+				<div class="panel-heading" style="background-color:#66BEFF">
 					게시글 목록
 					<button id='regBtn' type="button"
-						class="btn btn-outline btn-success btn-xs pull-right">글쓰기</button>
+						class="btn bnt-outline bnt-dark btn-xs pull-right">글쓰기</button>
 				</div>
 
 				<!-- /.panel-heading -->
@@ -37,7 +37,7 @@
 						<c:forEach var="tb" items="${list}">
 							<tr>
 								<td>${tb.bno }</td>
-								<td><a class='move' href='<c:out value="${tb.bno }"/>'><c:out value="${tb.title }"/></a></td>
+								<td><a class='move' href='<c:out value="${tb.bno }"/>'><c:out value="${tb.title }[${tb.replyCnt}]"/></a></td>
 								<td>${tb.writer }</td>
 								<td>${tb.regDate }</td>
 								<td>${tb.updateDate }</td>
